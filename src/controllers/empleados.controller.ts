@@ -1,30 +1,26 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {Empleados} from '../models';
 import {EmpleadosRepository} from '../repositories';
 
+@authenticate('jwt')
 export class EmpleadosController {
   constructor(
     @repository(EmpleadosRepository)
-    public empleadosRepository : EmpleadosRepository,
-  ) {}
+    public empleadosRepository: EmpleadosRepository,
+  ) { }
 
   @post('/empleados')
   @response(200, {

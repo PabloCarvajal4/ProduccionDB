@@ -1,30 +1,26 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {Produccion} from '../models';
 import {ProduccionRepository} from '../repositories';
 
+@authenticate('jwt')
 export class ProduccionController {
   constructor(
     @repository(ProduccionRepository)
-    public produccionRepository : ProduccionRepository,
-  ) {}
+    public produccionRepository: ProduccionRepository,
+  ) { }
 
   @post('/produccions')
   @response(200, {
